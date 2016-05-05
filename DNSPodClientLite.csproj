@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>local</ProjectType>
+    <ProjectVersion>7.10.377</ProjectVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{A84F16C2-CE04-47F5-B54B-63574A30BAD3}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <AssemblyName>DNSPodClientLite</AssemblyName>
+    <OutputType>WinExe</OutputType>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Web" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="Global.cs" />
+    <Compile Include="DNSPodClientLite\FMonitorSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\Properties\Settings.cs" />
+    <Compile Include="DNSPodClientLite\Service1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\Logger.cs" />
+    <Compile Include="DNSPodClientLite\IpHelper.cs" />
+    <Compile Include="DNSPodClientLite\FImportRecords.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\DoubleBufferListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\ListViewColumn.cs" />
+    <Compile Include="DNSPodClientLite\ListViewExtender.cs" />
+    <Compile Include="DNSPodClientLite\ListViewColumnMouseEventArgs.cs" />
+    <Compile Include="DNSPodClientLite\ListViewButtonColumn.cs" />
+    <Compile Include="DNSPodClientLite\Config.cs" />
+    <Compile Include="DNSPodClientLite\FMonitor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\FLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\MyWebClient.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\MonitorHistory.cs" />
+    <Compile Include="DNSPodClientLite\FNetCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\Properties\Resources.cs" />
+    <Compile Include="DNSPodClientLite\FDomainList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\FDdns.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\MonitorData.cs" />
+    <Compile Include="DNSPodClientLite\HttpMonitor.cs" />
+    <Compile Include="DNSPodClientLite\FMonitorChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\ProjectInstaller.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\Program.cs" />
+    <Compile Include="DNSPodClientLite\MyPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DNSPodClientLite\DDns.cs" />
+    <Compile Include="DNSPodClientLite\Api.cs" />
+    <Compile Include="DNSPodClientLite\DomainRecord.cs" />
+    <EmbeddedResource Include="DNSPodClientLite.Properties.Resources.resources" />
+    <EmbeddedResource Include="DNSPodClientLite.FMonitorSetting.resources" />
+    <EmbeddedResource Include="DNSPodClientLite.FDomainList.resources" />
+    <EmbeddedResource Include="DNSPodClientLite.FNetCard.resources" />
+    <EmbeddedResource Include="DNSPodClientLite.FLogin.resources" />
+    <EmbeddedResource Include="DNSPodClientLite.FImportRecords.resources" />
+    <EmbeddedResource Include="DNSPodClientLite.FMonitorChart.resources" />
+    <EmbeddedResource Include="DNSPodClientLite.FDdns.resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="readme.txt" />
+  </ItemGroup>
+</Project>
