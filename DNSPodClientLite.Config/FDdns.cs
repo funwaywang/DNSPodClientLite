@@ -24,9 +24,10 @@ namespace DNSPodClientLite
         private ColumnHeader recordtype;
         private StatusStrip statusStrip1;
         private ColumnHeader value;
-        private ToolStripMenuItem 查看日志ToolStripMenuItem;
-        private ToolStripMenuItem 禁用动态解析ToolStripMenuItem;
-        private ToolStripMenuItem 启用动态解析ToolStripMenuItem;
+        private ToolStripMenuItem menuShowLogs;
+        private ToolStripMenuItem menuDisableDdns;
+        private ToolStripMenuItem menuManualRefresh;
+        private ToolStripMenuItem menuEnableDdns;
 
         public FDdns()
         {
@@ -141,95 +142,157 @@ namespace DNSPodClientLite
 
         private void InitializeComponent()
         {
-            components = new Container();
-            statusStrip1 = new StatusStrip();
-            lblStatus = new ToolStripStatusLabel();
-            lvRecords = new DoubleBufferListView();
-            name = new ColumnHeader();
-            value = new ColumnHeader();
-            recordtype = new ColumnHeader();
-            line = new ColumnHeader();
-            panel1 = new Panel();
-            label1 = new Label();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            启用动态解析ToolStripMenuItem = new ToolStripMenuItem();
-            禁用动态解析ToolStripMenuItem = new ToolStripMenuItem();
-            查看日志ToolStripMenuItem = new ToolStripMenuItem();
-            statusStrip1.SuspendLayout();
-            panel1.SuspendLayout();
-            contextMenuStrip1.SuspendLayout();
-            base.SuspendLayout();
-            statusStrip1.Items.AddRange(new ToolStripItem[] { lblStatus });
-            statusStrip1.Location = new Point(0, 0x159);
-            statusStrip1.Name = "statusStrip1";
-            statusStrip1.Size = new Size(0x29f, 0x16);
-            statusStrip1.TabIndex = 0;
-            statusStrip1.Text = "statusStrip1";
-            lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(0x20, 0x11);
-            lblStatus.Text = "就绪";
-            lvRecords.Anchor = AnchorStyles.Right | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
-            lvRecords.Columns.AddRange(new ColumnHeader[] { name, value, recordtype, line });
-            lvRecords.FullRowSelect = true;
-            lvRecords.Location = new Point(0, 0x2a);
-            lvRecords.MultiSelect = false;
-            lvRecords.Name = "lvRecords";
-            lvRecords.Size = new Size(0x29f, 300);
-            lvRecords.TabIndex = 2;
-            lvRecords.UseCompatibleStateImageBehavior = false;
-            lvRecords.View = View.Details;
-            lvRecords.MouseClick += new MouseEventHandler(lvRecords_MouseClick);
-            name.Text = "记录名称";
-            name.Width = 150;
-            value.Text = "记录值";
-            value.Width = 150;
-            recordtype.Text = "记录类型";
-            line.Text = "记录线路";
-            panel1.BackColor = Color.DeepSkyBlue;
-            panel1.Controls.Add(label1);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(0x29f, 40);
-            panel1.TabIndex = 6;
-            label1.AutoSize = true;
-            label1.Font = new Font("宋体", 15.75f, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(0x5e, 0x15);
-            label1.TabIndex = 1;
-            label1.Text = "动态解析";
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { 启用动态解析ToolStripMenuItem, 禁用动态解析ToolStripMenuItem, 查看日志ToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(0x99, 0x5c);
-            启用动态解析ToolStripMenuItem.Name = "启用动态解析ToolStripMenuItem";
-            启用动态解析ToolStripMenuItem.Size = new Size(0x98, 0x16);
-            启用动态解析ToolStripMenuItem.Text = "启用动态解析";
-            启用动态解析ToolStripMenuItem.Click += new EventHandler(启用动态解析ToolStripMenuItem_Click);
-            禁用动态解析ToolStripMenuItem.Name = "禁用动态解析ToolStripMenuItem";
-            禁用动态解析ToolStripMenuItem.Size = new Size(0x98, 0x16);
-            禁用动态解析ToolStripMenuItem.Text = "禁用动态解析";
-            禁用动态解析ToolStripMenuItem.Click += new EventHandler(禁用动态解析ToolStripMenuItem_Click);
-            查看日志ToolStripMenuItem.Name = "查看日志ToolStripMenuItem";
-            查看日志ToolStripMenuItem.Size = new Size(0x98, 0x16);
-            查看日志ToolStripMenuItem.Text = "查看日志";
-            查看日志ToolStripMenuItem.Click += new EventHandler(查看日志ToolStripMenuItem_Click);
-            base.AutoScaleDimensions = new SizeF(6f, 12f);
-            base.ClientSize = new Size(0x29f, 0x16f);
-            base.Controls.Add(panel1);
-            base.Controls.Add(lvRecords);
-            base.Controls.Add(statusStrip1);
-            base.Name = "FDdns";
-            Text = "动态解析-DNSPodClientLite";
-            base.Load += new EventHandler(FRecordList_Load);
-            statusStrip1.ResumeLayout(false);
-            statusStrip1.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
-            contextMenuStrip1.ResumeLayout(false);
-            base.ResumeLayout(false);
-            base.PerformLayout();
+            this.components = new System.ComponentModel.Container();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lvRecords = new DNSPodClientLite.DoubleBufferListView();
+            this.name = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.value = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.recordtype = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.line = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.menuEnableDdns = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuManualRefresh = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuDisableDdns = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuShowLogs = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 345);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(671, 22);
+            this.statusStrip1.TabIndex = 0;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(32, 17);
+            this.lblStatus.Text = "就绪";
+            // 
+            // lvRecords
+            // 
+            this.lvRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.lvRecords.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.name,
+            this.value,
+            this.recordtype,
+            this.line});
+            this.lvRecords.FullRowSelect = true;
+            this.lvRecords.HideSelection = false;
+            this.lvRecords.Location = new System.Drawing.Point(0, 42);
+            this.lvRecords.MultiSelect = false;
+            this.lvRecords.Name = "lvRecords";
+            this.lvRecords.Size = new System.Drawing.Size(671, 300);
+            this.lvRecords.TabIndex = 2;
+            this.lvRecords.UseCompatibleStateImageBehavior = false;
+            this.lvRecords.View = System.Windows.Forms.View.Details;
+            this.lvRecords.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvRecords_MouseClick);
+            // 
+            // name
+            // 
+            this.name.Text = "记录名称";
+            this.name.Width = 150;
+            // 
+            // value
+            // 
+            this.value.Text = "记录值";
+            this.value.Width = 150;
+            // 
+            // recordtype
+            // 
+            this.recordtype.Text = "记录类型";
+            // 
+            // line
+            // 
+            this.line.Text = "记录线路";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.DeepSkyBlue;
+            this.panel1.Controls.Add(this.label1);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(671, 40);
+            this.panel1.TabIndex = 6;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("SimSun", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(94, 21);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "动态解析";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuEnableDdns,
+            this.menuManualRefresh,
+            this.menuDisableDdns,
+            this.menuShowLogs});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(149, 92);
+            // 
+            // menuEnableDdns
+            // 
+            this.menuEnableDdns.Name = "menuEnableDdns";
+            this.menuEnableDdns.Size = new System.Drawing.Size(148, 22);
+            this.menuEnableDdns.Text = "启用动态解析";
+            this.menuEnableDdns.Click += new System.EventHandler(this.menuEnableDdns_Click);
+            // 
+            // menuManualRefresh
+            // 
+            this.menuManualRefresh.Name = "menuManualRefresh";
+            this.menuManualRefresh.Size = new System.Drawing.Size(148, 22);
+            this.menuManualRefresh.Text = "手工刷新";
+            this.menuManualRefresh.Click += new System.EventHandler(this.menuManualRefresh_Click);
+            // 
+            // menuDisableDdns
+            // 
+            this.menuDisableDdns.Name = "menuDisableDdns";
+            this.menuDisableDdns.Size = new System.Drawing.Size(148, 22);
+            this.menuDisableDdns.Text = "禁用动态解析";
+            this.menuDisableDdns.Click += new System.EventHandler(this.menuDisableDdns_Click);
+            // 
+            // menuShowLogs
+            // 
+            this.menuShowLogs.Name = "menuShowLogs";
+            this.menuShowLogs.Size = new System.Drawing.Size(148, 22);
+            this.menuShowLogs.Text = "查看日志";
+            this.menuShowLogs.Click += new System.EventHandler(this.menuShowLogs_Click);
+            // 
+            // FDdns
+            // 
+            this.ClientSize = new System.Drawing.Size(671, 367);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.lvRecords);
+            this.Controls.Add(this.statusStrip1);
+            this.Name = "FDdns";
+            this.Text = "动态解析-DNSPodClientLite";
+            this.Load += new System.EventHandler(this.FRecordList_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         private void lvRecords_MouseClick(object sender, MouseEventArgs e)
@@ -242,15 +305,15 @@ namespace DNSPodClientLite
                     DnsPodApi.Record tag = (DnsPodApi.Record)info.Item.Tag;
                     if (tag.IsDdns)
                     {
-                        contextMenuStrip1.Items[0].Visible = false;
-                        contextMenuStrip1.Items[1].Visible = true;
-                        contextMenuStrip1.Items[2].Visible = true;
+                        menuEnableDdns.Visible = false;
+                        menuManualRefresh.Visible = true;
+                        menuDisableDdns.Visible = true;
                     }
                     else
                     {
-                        contextMenuStrip1.Items[0].Visible = true;
-                        contextMenuStrip1.Items[1].Visible = false;
-                        contextMenuStrip1.Items[2].Visible = false;
+                        menuEnableDdns.Visible = true;
+                        menuManualRefresh.Visible = false;
+                        menuDisableDdns.Visible = false;
                     }
                     contextMenuStrip1.Show(lvRecords, e.Location);
                 }
@@ -314,7 +377,7 @@ namespace DNSPodClientLite
             }
         }
 
-        private void 查看日志ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void menuShowLogs_Click(object sender, EventArgs e)
         {
             try
             {
@@ -329,7 +392,7 @@ namespace DNSPodClientLite
             }
         }
 
-        private void 禁用动态解析ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void menuDisableDdns_Click(object sender, EventArgs e)
         {
             try
             {
@@ -348,7 +411,7 @@ namespace DNSPodClientLite
             }
         }
 
-        private void 启用动态解析ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void menuEnableDdns_Click(object sender, EventArgs e)
         {
             try
             {
@@ -368,6 +431,24 @@ namespace DNSPodClientLite
                     new Logger("ddns").Info("change ip:{0}.{1}({2})-{3}", new object[] { tag.Name, domain.Name, tag.RecordId, AppStatus.Default.Ddns.LastIp });
                     AppStatus.Default.Config.Save();
                     BindData();
+                }
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message, "Exception", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _logger.Error("fddns.enable_ddns has an error:{0}", new object[] { exception });
+            }
+        }
+
+        private void menuManualRefresh_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (lvRecords.SelectedItems.Count >= 1)
+                {
+                    DnsPodApi.Record tag = (DnsPodApi.Record)lvRecords.SelectedItems[0].Tag;
+                    AppStatus.Default.Api.Ddns(domain.DomainId, tag.RecordId, AppStatus.Default.Ddns.LastIp);
+                    new Logger("ddns").Info("change ip:{0}.{1}({2})-{3}", new object[] { tag.Name, domain.Name, tag.RecordId, AppStatus.Default.Ddns.LastIp });
                 }
             }
             catch (Exception exception)

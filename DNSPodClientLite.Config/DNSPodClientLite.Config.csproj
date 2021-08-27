@@ -100,6 +100,9 @@
     <EmbeddedResource Include="ControlPanelForm.resx">
       <DependentUpon>ControlPanelForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FDdns.resx">
+      <DependentUpon>FDdns.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginDialog.resx">
       <DependentUpon>LoginDialog.cs</DependentUpon>
     </EmbeddedResource>
