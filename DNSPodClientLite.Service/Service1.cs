@@ -88,9 +88,11 @@ namespace DnsPodClient.Service
                 Ddns = new DDns(Config.LastIp, Config.GetLocal());
                 Ddns.IPChanged += Ddns_IPChangedNotified;
                 Ddns.Start();
+
                 Monitor = new HttpMonitor(Config);
                 Monitor.StatusChanged += Monitor_StatusChanged;
                 Monitor.Start();
+
                 logger.Info("end start", new object[0]);
             }
             catch (Exception exception)
@@ -102,15 +104,25 @@ namespace DnsPodClient.Service
         private void Ddns_IPChangedNotified(object sender, IpChangedEventArgs e)
         {
             Logger logger = new Logger("ddns");
-            Config.LastIp = e.IP;
-            logger.Info("change ip 2.1:{0}", new object[] { e.IP });
-            Config.Save();
-            logger.Info("change ip 3:{0}", new object[] { e.IP });
-            foreach (Config.DDNSConfig config in Config.GetDdnses())
+            logger.Info("changing ip to {0}", new object[] { e.IP });
+
+            try
             {
-                logger.Info("change ip 4:{0}", new object[] { config.Subdomain });
-                Api.Ddns(config.DomainId, config.RecordId, e.IP);
-                logger.Info("动态IP修改:{0}.{1}({2})-{3}", new object[] { config.Subdomain, config.Domain, config.RecordId, e.IP });
+                foreach (Config.DDNSConfig config in Config.GetDdnses())
+                {
+                    logger.Info("change ip 4:{0}", new object[] { config.Subdomain });
+                    Api.UpdateDns(config.DomainId, config.RecordId, e.IP);
+                    logger.Info("动态IP修改:{0}.{1}({2})-{3}", new object[] { config.Subdomain, config.Domain, config.RecordId, e.IP });
+                }
+
+                Config.LastIp = e.IP;
+                Config.Save();
+                logger.Info("ip changed! {0}", new object[] { e.IP });
+            }
+            catch (Exception exception)
+            {
+                logger.Info("Update DNS fail.");
+                logger.Error(exception.Message);
             }
         }
 

@@ -427,7 +427,7 @@ namespace DNSPodClientLite
                     };
                     Config.DDNSConfig item = config2;
                     AppStatus.Default.Config.AddDdns(item);
-                    AppStatus.Default.Api.Ddns(domain.DomainId, tag.RecordId, AppStatus.Default.Ddns.LastIp);
+                    AppStatus.Default.Api.UpdateDns(domain.DomainId, tag.RecordId, AppStatus.Default.Ddns.LastIp);
                     new Logger("ddns").Info("change ip:{0}.{1}({2})-{3}", new object[] { tag.Name, domain.Name, tag.RecordId, AppStatus.Default.Ddns.LastIp });
                     AppStatus.Default.Config.Save();
                     BindData();
@@ -447,7 +447,7 @@ namespace DNSPodClientLite
                 if (lvRecords.SelectedItems.Count >= 1)
                 {
                     DnsPodApi.Record tag = (DnsPodApi.Record)lvRecords.SelectedItems[0].Tag;
-                    AppStatus.Default.Api.Ddns(domain.DomainId, tag.RecordId, AppStatus.Default.Ddns.LastIp);
+                    AppStatus.Default.Api.UpdateDns(domain.DomainId, tag.RecordId, AppStatus.Default.Ddns.LastIp);
                     new Logger("ddns").Info("change ip:{0}.{1}({2})-{3}", new object[] { tag.Name, domain.Name, tag.RecordId, AppStatus.Default.Ddns.LastIp });
                 }
             }

@@ -29,7 +29,7 @@ namespace DNSPodClientLite
             }
         }
 
-        public void Ddns(int domainid, int recordid, string ip)
+        public void UpdateDns(int domainid, int recordid, string ip)
         {
             Logger logger = new Logger("ddns");
             Record record = GetRecord(domainid, recordid);
