@@ -450,6 +450,8 @@ namespace DNSPodClientLite
                     await AppStatus.Default.Ddns.RefreshIpAsync();
                     AppStatus.Default.Api.UpdateDns(domain.DomainId, tag.RecordId, AppStatus.Default.Ddns.LastIp);
                     new Logger("ddns").Info("change ip:{0}.{1}({2})-{3}", new object[] { tag.Name, domain.Name, tag.RecordId, AppStatus.Default.Ddns.LastIp });
+
+                    MessageBox.Show($"Current IP is: {AppStatus.Default.Ddns.LastIp}");
                 }
             }
             catch (Exception exception)
