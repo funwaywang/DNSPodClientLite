@@ -51,6 +51,8 @@
     <Compile Include="HttpMonitor.cs" />
     <Compile Include="EventArgs\IpChangedEventArgs.cs" />
     <Compile Include="IpHelper.cs" />
+    <Compile Include="IpProvider.cs" />
+    <Compile Include="IpProviderManager.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MonitorData.cs" />
     <Compile Include="MonitorHistory.cs" />
@@ -61,6 +63,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EventArgs\RecordStatusChangedEventArgs.cs" />
     <Compile Include="ServiceHelper.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="IpProviders.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

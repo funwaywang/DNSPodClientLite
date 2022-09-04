@@ -180,8 +180,8 @@ namespace DNSPodClientLite
             // 
             // lvRecords
             // 
-            this.lvRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.lvRecords.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lvRecords.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.name,
@@ -440,13 +440,14 @@ namespace DNSPodClientLite
             }
         }
 
-        private void menuManualRefresh_Click(object sender, EventArgs e)
+        private async void menuManualRefresh_Click(object sender, EventArgs e)
         {
             try
             {
                 if (lvRecords.SelectedItems.Count >= 1)
                 {
                     DnsPodApi.Record tag = (DnsPodApi.Record)lvRecords.SelectedItems[0].Tag;
+                    await AppStatus.Default.Ddns.RefreshIpAsync();
                     AppStatus.Default.Api.UpdateDns(domain.DomainId, tag.RecordId, AppStatus.Default.Ddns.LastIp);
                     new Logger("ddns").Info("change ip:{0}.{1}({2})-{3}", new object[] { tag.Name, domain.Name, tag.RecordId, AppStatus.Default.Ddns.LastIp });
                 }

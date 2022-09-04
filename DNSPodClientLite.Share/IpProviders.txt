@@ -1,0 +1,14 @@
+﻿http://pv.sohu.com/cityjson?ie=utf-8
+\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b
+http://www.net.cn/static/customercare/yourip.asp
+<h2>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</h2>
+http://httpbin.org/ip
+"origin": "(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})"
+http://myip.ipip.net
+IP：(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})
+https://ifconfig.me
+<strong id="ip_address">(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</strong>
+http://ifconfig.io
+<div class="col-sm-9">(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</div>
+https://user.ip138.com/ip/
+(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})</title>

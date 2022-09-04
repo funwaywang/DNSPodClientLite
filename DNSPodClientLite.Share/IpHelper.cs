@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DNSPodClientLite.Share;
+using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace DNSPodClientLite
 {
@@ -20,26 +22,42 @@ namespace DNSPodClientLite
         {
             try
             {
-                IP = GetIpFromDNSPod();
+                var provider = IpProviderManager.Default.GetRandomProvider();
+                if (provider == null)
+                {
+                    throw new Exception("Could not get any ip provider");
+                }
+
+                var ip = provider.GetIp();
+                IP = ip;
             }
-            catch
+            catch (Exception ex)
             {
-                try
-                {
-                    IP = GetIpFromIp138();
-                }
-                catch
-                {
-                    try
-                    {
-                        IP = GetIpFromBaidu();
-                    }
-                    catch (Exception exception)
-                    {
-                        new Logger("ddns").Error("GetIp error:{0}", new object[] { exception });
-                    }
-                }
+                new Logger("ddns").Error("GetIp error:{0}", new object[] { ex });
             }
+
+            //try
+            //{
+            //    IP = GetIpFromDNSPod();
+            //}
+            //catch
+            //{
+            //    try
+            //    {
+            //        IP = GetIpFromIp138();
+            //    }
+            //    catch
+            //    {
+            //        try
+            //        {
+            //            IP = GetIpFromBaidu();
+            //        }
+            //        catch (Exception exception)
+            //        {
+            //            new Logger("ddns").Error("GetIp error:{0}", new object[] { exception });
+            //        }
+            //    }
+            //}
         }
 
         private static string GetIpByWeb(string url, Regex reg, string domainName)
