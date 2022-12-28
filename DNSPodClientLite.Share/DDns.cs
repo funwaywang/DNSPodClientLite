@@ -1,5 +1,6 @@
 ﻿using DNSPodClientLite.Share;
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ namespace DNSPodClientLite
     public class DDns
     {
         private Logger _logger = new Logger("ddns");
+
         public event MessageEventHandler InformationReceived;
         public event IpChangedEventHandler IPChanged;
 
@@ -36,8 +38,12 @@ namespace DNSPodClientLite
                     {
                         _logger.Error("get ip timeout", new object[0]);
                     }
+
                     string ip = helper.IP;
-                    UpdateIp(ip);
+                    if (!string.IsNullOrEmpty(ip))
+                    {
+                        UpdateIp(ip);
+                    }
                 }
                 catch (Exception exception)
                 {
@@ -54,7 +60,7 @@ namespace DNSPodClientLite
         {
             _logger.Info("get ip:{0} - {1}", new object[] { LastIp, ip });
             InformationReceived?.Invoke(this, new MessageEventArgs($"{DateTime.Now.ToLongTimeString()}：动态域名获取本机最新IP：{ip}"));
-            if (ip != LastIp)
+            if (ip != LastIp && !string.IsNullOrEmpty(ip))
             {
                 var ipChangedArgs = new IpChangedEventArgs(LastIp, ip);
                 LastIp = ip;

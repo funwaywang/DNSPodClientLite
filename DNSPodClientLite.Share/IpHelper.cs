@@ -1,5 +1,6 @@
 ﻿using DNSPodClientLite.Share;
 using System;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -12,11 +13,14 @@ namespace DNSPodClientLite
     {
         private static readonly Regex _regBaidu = new Regex(@"<strong>(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})<\/strong>", RegexOptions.IgnoreCase);
         private static readonly Regex _regIp138 = new Regex(@"<center>.*?(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}).*<\/center>", RegexOptions.IgnoreCase);
+        private static readonly string[] invalidIps = "localhost,127.0.0.1".Split(',');
 
         public IpHelper(string oldip)
         {
             IP = oldip;
         }
+
+        public string IP { get; set; }
 
         public void GetIp(object state)
         {
@@ -29,11 +33,16 @@ namespace DNSPodClientLite
                 }
 
                 var ip = provider.GetIp();
+                if (string.IsNullOrEmpty(ip) || invalidIps.Contains(ip) || IsPrivateIp(ip))
+                {
+                    throw new Exception($"Invalid ip get: [{ip}]");
+                }
+
                 IP = ip;
             }
             catch (Exception ex)
             {
-                new Logger("ddns").Error("GetIp error:{0}", new object[] { ex });
+                new Logger("ddns").Error("GetIp error:{0}, provider: ", new object[] { ex });
             }
 
             //try
@@ -101,7 +110,22 @@ namespace DNSPodClientLite
             return GetIpByWeb(url, _regIp138, "ip138");
         }
 
-        public string IP { get; set; }
+        public static bool IsPrivateIp(string ipAddress)
+        {
+            int[] ipParts = ipAddress.Split(new String[] { "." }, StringSplitOptions.RemoveEmptyEntries)
+                                     .Select(s => int.Parse(s)).ToArray();
+            // in private ip range
+            if (ipParts[0] == 10 ||
+                (ipParts[0] == 192 && ipParts[1] == 168) ||
+                (ipParts[0] == 172 && (ipParts[1] >= 16 && ipParts[1] <= 31)))
+            {
+                return true;
+            }
+
+            // IP Address is probably public.
+            // This doesn't catch some VPN ranges like OpenVPN and Hamachi.
+            return false;
+        }
     }
 }
 
